@@ -1,0 +1,145 @@
+# Anotações
+
+- git init: inicia um repositório git/um novo projeto
+
+- pwd: mostra o caminho está no momento.
+
+- git add (se colocar . significa que vai se referir 
+a todos os arquivos no diretório local): que arquivos estou inserindo
+
+- git commit -m "": que mensagem esWtou inserindo no ponto da história
+
+- git log: mostra todas as commits já feitas com todas as informações.
+--oneline mostra apenas o nome Hash SHA-1 da commit e o título inserido nela.
+
+- vim <filename>: serve para criar ou para mexer no arquivo pelo vim
+
+- i para editar o arquivo pelo vim
+
+- :wq para salvar as informações do arquivo no vim, depois de apertar esc obviamente.
+
+- :q para fechar um arquivo não modificado no vim, se modificado colocar ! ficando :q!.
+
+- mkdir serve para criar uma pasta
+
+- touch "nome do arquivo" (sem aspas): serve para criar ou modificar um arquivo.
+
+- git status: mostra a situação dos arquivos criados, se foram adicionados,
+modificados ou "commitados".
+
+- git add *: serve para buscar todos os arquivos pelo seu tipo. Ex: .html, .css.
+
+- git diff: serve para ver todas as modificações feitas na pasta, até mesmo arquivos
+deletados e também arquivos modificados, porém não dá pra ver arquivos que foram inseridos 
+por outros meios de fora do git. --staged mostra a modificação dos arquivos na stage area.
+--color-words mostra apenas as palavras que foram modificadas com coloração.
+
+- ls: mostra os arquivos e diretórios do projeto. -a mostra os ocultos. -l mostra com detalhes.
+ -al mostra os ocultos com detalhes.
+
+- para deletar arquivos, é melhor usar o "git rm <filename>" do que usar um "rm" direto ou
+apagar um arquivo direto pela pasta, pois o "git rm" já coloca ele direto na staged area
+
+-  mesma coisa vale para renomear arquivos e mover arquivos, melhor usar o "git mv" do que
+usar um "mv" direto ou renomear/mover direto na pasta, pelo mesmo motivo citado acima.
+
+- git restore: desfaz uma modificação que ainda não esteja na stage area mas se tiver, é só
+usar o "--staged".
+
+- git commit --amend: corrige o ultimo commit ou em qual o HEAD está apontando.
+
+- git checkout <Hash SHA-1 name (ou nome do commit)> -- <filename>: recupera o arquivo requisitado
+a partir do nome do commit inserido e já coloca ele na stage area.
+
+- git clean -n: mostra os arquivos não rastreados pelo git que serão removidos pra sempre.
+
+- git clean -f: força a remoção dos arquivos não rastreados para sempre.
+
+- git revert HEAD~<Número da head contando a head apontada como zero e subtraindo>:
+reverte uma commit anterior que foi apontada neste comando.
+
+- git revert <Hash SHA-1 name (ou nome do commit)>: faz o mesmo acima, porém é recomendado usar o
+"git log --oneline".
+
+- git commit -a: quando os arquivos já foram adicionados/commitados no repositório ou quando já
+estão rastreados, este comando servirá para pular uma etapa que é a git add, mas somente quando
+a condição acima estiver correta.
+
+- git show <Hash SHA-1 name (ou nome do commit)>: mostra toda a alteração, modificação ou inserção
+feita em um commit. --color-words serve para este comando também.
+
+- git show <Hash SHA-1 name (ou nome do commit)> -- <caminho do diretório com filename ou filename>: 
+mostra todas as alterações de acordo com o arquivo/diretório especificado. Ele é uma diff que mostra o antes
+e depois. se colocar *, ele vai mostrar tudo o que tem no diretório apontado.
+
+- git rm -r --cached: remove um (nome do arquivo), mais de um ou todos (usando .) os arquivos no cache. 
+(mais de um arquivo deve ser especificado separando com " ").
+
+- git config --global user.email "email@example.com": O seu e-mail que será inserido nos seus commits.
+
+- git config --global user.name "Nome": O seu nome que será inserido no seu repositório.
+
+- git config --list: Mostra a lista de configurações do seu git.
+
+- git config --unset <config desejada>: Desfaz/reseta a configuração salva.
+
+- .gitignore é um arquivo usado para dizer qual pasta ou qual arquivo será ignorado. Pasta pode ser ignorada
+só com nome, mas se tiver nome igual de um arquivo, uma barra no começo ou no fim será necessária para
+diferenciar. O passo a passo é o seguinte:
+1. Criar o .gitignore e nele colocar o(s) arquivo(s) a serem ignorados;
+2. Adicionar e Commitar (ou commitar direto) o arquivo .gitignore;
+3. (Condição) Se o arquivo a ser ignorado foi modificado em alguma commit/ponto da história, será necessário
+remover todos os arquivos fazendo esta busca: "git rm -r --cached .";
+4. Adicionar todos os arquivos que foram removidos do cache. Quando fizer isso, ele irá deletar o(s) arquivo(s)
+ignorado(s) por causa que o .gitignore já está "ativo". Quando listar os arquivos/pasta, o arquivo ignorado aparece,
+mas não é possível interagir com ele.
+
+- como ligar o repositório remoto ao repositório local: primeiro tem que ir nas configurações de perfil do GitHub,
+depois ir na opção "SSH and GPG keys" e olhar o comando que gera uma nova chave SSH para ser adicionada e colada nesta configuração.
+Depois é só seguir o passo a passo do "Generate a new SSH key" and "Adding your SSH key to the ssh-agent". No último passo,
+trocar id_ed25519 por id_rsa, caso eu tenha feito o processo do algoritmo que não suporta ed25519.
+Dica: no linux tem que executar o comando "sudo -s -H" seguido do "exec ssh-agent bash (ou zsh)" para conseguir executar o ssh-agent.
+Após isso, é só executar o "ssh-add".
+
+- git remote add origin <SSH>: adiciona o repositório remoto ao repositório local.
+(Necessário apenas uma vez por repositório!)
+
+- git branch -M main: transforma a branch master em branch main para o padrão do Github.
+(Necessário apenas uma vez por repositório!)
+
+- git remote -v: mostra os repositórios na nuvem.
+
+- git push -u origin main(-u = upstream): envia as mudanças do repositório local para o repositório remoto pela primeira vez.
+(Necessário apenas uma vez numa branch main! Se criasse outra branch, aí teria que criar esse upstream, mas faria um pull request)
+
+- git push: Se feito o comando acima, ele irá fazer o mesmo só que no seu próprio projeto, ou na sua branch main.
+
+- git pull: puxa as mudanças do repositório remoto para o repositório local.
+
+- Caso haja conflitos entre o repositório local enviando informações e o repositório remoto trazendo, pelo vim você tem que apagar
+uma das mudanças, deixar a que você quer e apagar as informações adicionais que o git criou no arquivo.
+Porém fazer pelo VS Code é mais fácil, pois ele cria um sistema de escolha que te dá 4 possibilidades e tudo é feito com 1 click.
+
+- Features do github: fork é mais para fazer alterações, clone é mais para se quiser mexer em um repositório localmente e stars serve
+como um clone só que você apenas vai revisitá-lo.
+
+- git clone: faz o que foi descrito acima na parte de clone.
+
+- Pesquisas no Github: "search filter" serve para adicionar um filtro de busca. "user:<username>" serve para buscar por usuário
+
+- Adicionais: git trabalha com SHA1. Então se tiver alguma alteração num arquivo dentro de um repositório, o git saberá por que o código SHA1 mudará.
+Caso não tenha alterações, o SHA1 se manterá o mesmo.
+
+- git hash-object <arquivo>: mostra o código sha1 do arquivo mencionado. É diferente de um sha1 do comando openssl sha1 do windows, pois o git
+lida com o arquivo através de objetos. 
+    - Info Adicional: No caso, o objeto se chama Blob(bolha), seguido do tamanho do arquivo (caracteres existentes) e um \0 (vazio), seguido do
+conteúdo/arquivo o qual ele está apontando. Existe também o objeto Tree que tem a mesma composição de uma Blob, com a diferença que o conteúdo da tree é a blob
+com seu respectivo sha1 e o nome do arquivo, pois a Tree pode apontar para uma blob ou para uma outra Tree.  E por último existe o objeto Commit que tem o nome
+do próprio, seguido do tamanho, seguido do sha1 que é todo o conteúdo do commit, sendo: a tree e o parente com o hash, o nome do autor, a mensagem e um timestamp.
+    - --stdin: serve para echos no terminal.
+
+- Curiosidade sobre tokens: Para criar um token, basta ir nas configurações de desenvolvedor e gerar um token de acordo com as suas preferências e guardá-lo num
+lugar seguro. Ele servirá para clonar repositórios privados via HTTPS utlizando o próprio como uma senha, de forma mais segura.
+
+- Anotação para md: #h1 ##h2...; **Negrito**; _itálico_; -(hífen): •;
+    - Pesquisar "Markdown Reference" no Google também é uma boa. :D
