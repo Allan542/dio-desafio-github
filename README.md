@@ -1,5 +1,5 @@
 # Repositório do Desafio de Projeto sobre Git/Github da DIO
-Repositório criado para o Desafio de Projeto.
+Repositório criado para o Desafio de Projeto. Esse repositório foi criado único e exclusivamente para o desafio da DIO, pois eu já tenho outra forma de salvar minhas anotações que não sejam pelo Github e também, não é meu primeiro repositório aqui. Mesmo assim, estarei disponibilizando as anotações sobre Github e a pastinha do curso de Introdução ao Git/Github
 
 ## Links Úteis
 
